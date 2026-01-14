@@ -1,4 +1,5 @@
 import NavBar from '@/components/Navbar';
+import Chatbot from '@/components/Chatbot';
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
 // Portfolio data - customize this section
@@ -214,6 +215,9 @@ export default function Portfolio() {
           <p>© 2024 {portfolioData.name}. Built with Next.js & React.</p>
         </div>
       </footer>
+
+      <Chatbot />
+
     </div>
   );
 }

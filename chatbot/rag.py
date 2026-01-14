@@ -46,30 +46,38 @@ llm = ChatOpenAI(
 def query(question):
     print(f"\nThinking about: {question}...")
     
-    # Step 1: SEARCH the database manually
-    # "k=3" means "Find the top 3 most relevant chunks"
-    relevant_docs = vectorstore.similarity_search(question, k=3)
-    
-    # Step 2: BUILD the Context String
-    # We join the text of the found docs into one big string
-    context_text = "\n\n---\n\n".join([doc.page_content for doc in relevant_docs])
-    
-    # Step 3: CONSTRUCT the Prompt manually
-    # We paste the context and the question into a template
-    final_prompt = f"""
-    You are a helpful assistant. Answer the question based ONLY on the context below.
+    try:
+        # Step 1: SEARCH the database manually
+        # "k=3" means "Find the top 3 most relevant chunks"
+        relevant_docs = vectorstore.similarity_search(question, k=3)
+        
+        # Step 2: BUILD the Context String
+        # We join the text of the found docs into one big string
+        context_text = "\n\n---\n\n".join([doc.page_content for doc in relevant_docs])
+        
+        # Step 3: CONSTRUCT the Prompt manually
+        # We paste the context and the question into a template
+        final_prompt = f"""
+        You are a helpful assistant. Answer the question based ONLY on the context below.
 
-    Context:
-    {context_text}
+        Context:
+        {context_text}
 
-    Question: {question}
-    
-    Answer:
-    """
-    
-    # Step 4: ASK the LLM
-    response = llm.invoke(final_prompt)
-    return response
+        Question: {question}
+        
+        Answer:
+        """
+        
+        # Step 4: ASK the LLM
+        response = llm.invoke(final_prompt)
+        return response.content
+    except Exception as e:
+        # THIS IS THE IMPORTANT PART
+        print("\n❌ --------------------------------------------------")
+        print("❌ CRITICAL ERROR IN RAG.PY:")
+        print(e)
+        print("❌ --------------------------------------------------\n")
+        return f"Error: {str(e)}"
 
 # --- TEST IT ---
 if __name__ == "__main__":
