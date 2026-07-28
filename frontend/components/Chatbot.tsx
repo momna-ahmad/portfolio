@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 
+const API_URL = process.env.NEXT_PUBLIC_CHATBOT_API;
+
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -33,7 +35,7 @@ export default function Chatbot() {
 
     try {
       // Send request to FastAPI backend
-      const response = await fetch('http://localhost:8000/chat', {
+      const response = await fetch(`${API_URL}/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
