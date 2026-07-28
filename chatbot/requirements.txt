@@ -12,3 +12,4 @@ python-dotenv
 faiss-cpu
 pypdf
 openai
+sentence-transformers
