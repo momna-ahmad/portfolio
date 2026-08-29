@@ -1,28 +1,81 @@
 import NavBar from '@/components/Navbar';
+import styles from "./page.module.css";
 import Chatbot from '@/components/Chatbot';
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
-// Portfolio data - customize this section
-const portfolioData = {
-  name: "Momina Ahmad",
-  title: "Full Stack Developer",
-  bio: "I build exceptional digital experiences with modern web technologies. Passionate about creating scalable solutions and user-centric applications.",
-  email: "momnaahmdd@gmail.com",
-  phone: "0305 4049768",
-  location: "Lahore",
-  github: "https://github.com/momna-ahmad",
-  linkedin: "https://www.linkedin.com/in/momina-ahmad-509baa2a8",
-  
-  skills: [
-    "React", "Next.js", "TypeScript", "Node.js",
+// Portfolio data - display design 
+//General information - Hashmap 
+
+const overview = new Map([["name", "Momina Ahmad"], 
+  ["title", "Full Stack Developer"],
+  ["description", "I pay close attention to the initial architecture of applications which ultimately makes them scalable and I ensure that agentic development doesn't compromise the architectural foundations with easy workarounds."]]);
+
+// Tech stack - stack 
+
+const stack = ["PostgreSQL" , "SQL" , "Express", "React" , "Expo",
+   "TypeScript", "Node.js",
     "Python", "JavaScript", "Java", "C++",
-    "PostgreSQL", "Supabase", "Firebase", "MySQL",
+    "Supabase", "Firebase", "MySQL",
     "Express", "Flutter", "MongoDB", "Redux"
-  ],
-  
-  projects: [
-    {
+];
+
+//Experience - Linked list 
+
+const experiences = [
+  {
+    position: "Full Stack Intern",
+    company: "BitBash",
+    startDate: "Jan 2026",
+    endDate: "Feb 2026",
+    skills: ["Python", "Web Scraping", "Automation"],
+    description: "Developed Python-based automation pipelines, including a high-volume real estate data scraping tool for lead generation and a real-time Discord bot for monitoring Upwork opportunities. Audited web applications to improve Google Lighthouse performance metrics and loading speeds."
+  },
+  {
+    position: "Full Stack Developer",
+    company: "Fiverr - Freelance",
+    startDate: "Feb 2026",
+    endDate: "July 2026",
+    skills: ["React", "Supabase", "Third-party APIs", "React Native", "Expo"],
+    description: "- Developed full stack healthcare web application for international client using react and supabase, connecting patients with healthcare professionals including doctors, pharmacies and labs and developed its corresponding cross-platform mobile application using react native and expo"
+  },
+];
+
+//Projects - array of objects
+
+const projects = [
+  {
       id: 1,
+      type: "Web Application",
+      title: "Fundxprout - A Crowdfunding Platform",
+      description: "A web platform for listing homes, vehicles, and halls for rent, enabling users to create and browse rental opportunities with real-time chat functionality.",
+      image: "/fundxprout.png",
+      tags: ["Next.js", "TypeScript", "Supabase", "Solidity"],
+      liveUrl: "https://github.com/momna-ahmad",
+      githubUrl: "https://github.com/momna-ahmad"
+    },
+    {
+      id: 2,
+      type: "Web Application",
+      title: "CliniConnect - A Healthcare Platform",
+      description: "A web platform for listing homes, vehicles, and halls for rent, enabling users to create and browse rental opportunities with real-time chat functionality.",
+      image: "/rentalot.png",
+      tags: ["React", "TypeScript", "Supabase", "Jitsi Meet", "Paystack API"],
+      liveUrl: "https://www.cliniconnectng.com",
+      githubUrl: "https://github.com/momna-ahmad"
+    },
+    {
+      id: 3,
+      type: "Mobile Application",
+      title: "CliniConnect - A Healthcare Mobile App",
+      description: "A cross-platform mobile application for connecting patients with healthcare professionals, featuring real-time video consultations and appointment scheduling.",
+      image: "/rentalot.png",
+      tags: ["React Native", "Expo", "Supabase"],
+      liveUrl: "https://github.com/momna-ahmad",
+      githubUrl: "https://github.com/momna-ahmad"
+    },
+  {
+      id: 4,
+      type: "Web Application",
       title: "Rental Platform",
       description: "A web platform for listing homes, vehicles, and halls for rent, enabling users to create and browse rental opportunities with real-time chat functionality.",
       image: "/rentalot.png",
@@ -31,7 +84,8 @@ const portfolioData = {
       githubUrl: "https://github.com/momna-ahmad"
     },
     {
-      id: 2,
+      id: 5,
+      type: "Web Application",
       title: "CRM Website",
       description: "A comprehensive CRM dashboard to manage customer data, tasks and workflows with RESTful API integration and email support system.",
       image: "/globuy.png",
@@ -40,7 +94,8 @@ const portfolioData = {
       githubUrl: "https://github.com/momna-ahmad"
     },
     {
-      id: 3,
+      id: 6,
+      type: "Web Application",
       title: "Mentorship Platform",
       description: "A platform connecting students with mentors for career guidance, featuring secure authentication and payment processing for priority services.",
       image: "/mentora.png",
@@ -49,7 +104,8 @@ const portfolioData = {
       githubUrl: "https://github.com/momna-ahmad"
     },
     {
-      id: 4,
+      id: 7,
+      type: "Mobile Application",
       title: "Home Services Mobile App",
       description: "A job marketplace app enabling users to post jobs and professionals to request completion, with location-based matching within 5km radius.",
       image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=600&fit=crop",
@@ -58,7 +114,8 @@ const portfolioData = {
       githubUrl: "https://github.com/momna-ahmad"
     },
     {
-      id: 5,
+      id: 8,
+      type: "Web Application",
       title: "Web Application Firewall Optimizer",
       description: "An intelligent WAF optimizer using Groq API and LLM-driven analysis for continuous security and performance tuning with automatic rule optimization.",
       image: "/firewall-optimizer.png",
@@ -66,46 +123,65 @@ const portfolioData = {
       liveUrl: "https://github.com/momna-ahmad",
       githubUrl: "https://github.com/momna-ahmad"
     }
-  ]
-};
+  ];
 
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Navigation */}
-      <NavBar name={portfolioData.name} />
+      <NavBar name={overview.get('name') ?? ""} />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
-            {portfolioData.name}
-          </h1>
-          <p className="text-2xl sm:text-3xl text-gray-700 mb-4">{portfolioData.title}</p>
-          <p className="text-lg text-gray-600 mb-8">
-            BSc. Software Engineering @ COMSATS (2023 - 2027)
-          </p>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-12">{portfolioData.bio}</p>
-          
-          <div className="flex justify-center space-x-6">
-            <a href={portfolioData.github} target="_blank" rel="noopener noreferrer" 
-               className="p-3 bg-black text-white rounded-full hover:bg-gray-800 transition">
-              <Github size={24} />
-            </a>
-            <a href={portfolioData.linkedin} target="_blank" rel="noopener noreferrer"
-               className="p-3 bg-black text-white rounded-full hover:bg-gray-800 transition">
-              <Linkedin size={24} />
-            </a>
-            <a href={`mailto:${portfolioData.email}`}
-               className="p-3 bg-black text-white rounded-full hover:bg-gray-800 transition">
-              <Mail size={24} />
-            </a>
+      <div className={styles.stage}>
+      <div className={styles.frame}>
+        <div className={`${styles.brace} ${styles.left}`}>{"{"}</div>
+ 
+        <div className={styles.content}>
+          <div className={`${styles.pair} ${styles.name}`}>
+            <span className={styles.key}>
+              <span className={styles.q}>&quot;</span>name
+              <span className={styles.q}>&quot;</span>
+              <span className={styles.colon}>:</span>
+            </span>
+            <span className={styles.value}>
+              {overview.get("name") ?? ""}<span className={styles.comma}>,</span>
+            </span>
+          </div>
+ 
+          <div className={`${styles.pair} ${styles.title}`}>
+            <span className={styles.key}>
+              <span className={styles.q}>&quot;</span>
+              title
+              <span className={styles.q}>&quot;</span>
+              <span className={styles.colon}>:</span>
+            </span>
+            <span className={styles.value}>
+              {overview.get("title") ?? ""}
+              <span className={styles.comma}>,</span>
+            </span>
+          </div>
+ 
+          <div className={`${styles.pair} ${styles.desc}`}>
+            <span className={styles.key}>
+              <span className={styles.q}>&quot;</span>
+              description
+              <span className={styles.q}>&quot;</span>
+              <span className={styles.colon}>:</span>
+            </span>
+            <span className={styles.value}>
+              <span className={styles.q}>&quot;</span>
+              {overview.get("description") ?? ""}
+              <span className={styles.q}>&quot;</span>
+            </span>
           </div>
         </div>
-      </section>
+ 
+        <div className={`${styles.brace} ${styles.right}`}>{"{"}</div>
+      </div>
+    </div>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      {/* <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 text-center">Skills & Technologies</h2>
           <div className="flex flex-wrap justify-center gap-4">
@@ -119,10 +195,10 @@ export default function Portfolio() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -178,10 +254,10 @@ export default function Portfolio() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      {/* <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-8">Let's Work Together</h2>
           <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
@@ -207,16 +283,16 @@ export default function Portfolio() {
             📍 {portfolioData.location} | 📞 {portfolioData.phone}
           </p>
         </div>
-      </section>
+      </section> */}
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-gray-200">
+      {/* <footer className="py-8 px-4 border-t border-gray-200">
         <div className="max-w-7xl mx-auto text-center text-gray-600">
           <p>© 2024 {portfolioData.name}. Built with Next.js & React.</p>
         </div>
-      </footer>
+      </footer> */}
 
-      <Chatbot />
+      {/*<Chatbot />*/}
 
     </div>
   );
