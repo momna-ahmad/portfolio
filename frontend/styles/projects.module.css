@@ -1,0 +1,343 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+:root {
+  --bg: #0c1713;
+  --bg-glow: #12241d;
+  --mint: #7fd9a8;
+  --mint-dim: #3f6e57;
+  --amber: #e8b95c;
+  --coral: #e8846f;
+  --text: #f2efe6;
+  --muted: #93a89c;
+  --punct: #4d6b5c;
+  --card: #10201a;
+  --card-border: #234438;
+  --chrome: #0a140f;
+}
+
+.wrap {
+  min-height: 100vh;
+  padding: 64px 24px;
+  display: flex;
+  justify-content: center;
+  background: radial-gradient(
+      ellipse 900px 600px at 50% 0%,
+      var(--bg-glow),
+      transparent 60%
+    ),
+    var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.panel {
+  width: 100%;
+ 
+}
+
+.eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 4px 2px;
+}
+.k {
+  color: var(--mint);
+}
+.p {
+  color: var(--punct);
+}
+
+.heading {
+  font-size: clamp(24px, 3.2vw, 32px);
+  font-weight: 700;
+  margin: 0 0 6px 2px;
+  letter-spacing: -0.01em;
+}
+
+.hint {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--punct);
+  margin: 0 0 36px 2px;
+}
+
+.sectionLabel {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--punct);
+  margin: 0 0 14px 2px;
+}
+
+.webGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 46px;
+  width: 100%;
+}
+
+/* ---------------- browser window (one per web project) ---------------- */
+.browser {
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--card);
+}
+
+.tabBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--chrome);
+}
+
+.lights {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.lights span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  color: var(--text);
+  border-radius: 6px 6px 0 0;
+  background: var(--card);
+  white-space: nowrap;
+}
+.favicon {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.close {
+  color: var(--punct);
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+.navBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--card);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.navIcons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--punct);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.navIcons span:nth-child(3) {
+  color: var(--muted);
+}
+
+.urlPill {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.lock {
+  color: var(--mint-dim);
+  flex-shrink: 0;
+  font-size: 10px;
+}
+.u {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deviceContent {
+  padding: 0 16px 4px;
+}
+
+/* ---------------- placeholder screenshots ---------------- */
+.shot {
+  width: 100%;
+  border-radius: 6px;
+  margin: 14px 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  background: #0e1c17;
+}
+.shotWeb {
+  aspect-ratio: 16 / 8;
+}
+.shotMobile {
+  aspect-ratio: 4 / 5;
+  margin-top: 12px;
+}
+
+.shot svg {
+  width: 30%;
+  height: 30%;
+  opacity: 0.5;
+}
+
+/* ---------------- shared project row ---------------- */
+.row {
+  padding: 12px 2px 16px;
+}
+
+.rowHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chevron {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--mint-dim);
+  font-size: 11px;
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+.chevronOpen {
+  transform: rotate(90deg);
+}
+
+.titleBlock {
+  flex: 1;
+  min-width: 0;
+}
+
+.projTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 3px;
+}
+
+.summary {
+  font-size: 12.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.more {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+.moreOpen {
+  max-height: 160px;
+}
+
+.moreInner {
+  padding: 10px 0 2px 22px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  color: var(--mint);
+  background: rgba(127, 217, 168, 0.08);
+  border: 1px solid rgba(127, 217, 168, 0.22);
+  border-radius: 5px;
+  padding: 2px 7px;
+}
+
+/* ---------------- phone frames (one per mobile app) ---------------- */
+.phoneGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.phone {
+  width: 250px;
+  border: 2px solid var(--card-border);
+  border-radius: 32px;
+  background: var(--card);
+  padding: 16px 10px 54px;
+  position: relative;
+}
+
+.speaker {
+  width: 46px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--card-border);
+  margin: 0 auto 2px;
+}
+
+.homeButton {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.02);
+}
+.homeButton::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 4px;
+  border: 1.5px solid var(--mint-dim);
+}
+
+@media (max-width: 640px) {
+  .phoneGrid {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron,
+  .more {
+    transition: none !important;
+  }
+}

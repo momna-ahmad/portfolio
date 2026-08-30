@@ -1,5 +1,8 @@
 import NavBar from '@/components/Navbar';
 import styles from "./page.module.css";
+import Stack from '@/components/Stack';
+import ExperienceList from '@/components/Experience';
+import Projects from '@/components/Projects';
 import Chatbot from '@/components/Chatbot';
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
@@ -12,11 +15,10 @@ const overview = new Map([["name", "Momina Ahmad"],
 
 // Tech stack - stack 
 
-const stack = ["PostgreSQL" , "SQL" , "Express", "React" , "Expo",
-   "TypeScript", "Node.js",
-    "Python", "JavaScript", "Java", "C++",
-    "Supabase", "Firebase", "MySQL",
-    "Express", "Flutter", "MongoDB", "Redux"
+const stack = ["Next/React/Redux" ,
+   "TypeScript", "Node.js/Express", 
+    "Python/JavaScript/Java", 
+    "MongoDB/PostgreSQL/SQL" 
 ];
 
 //Experience - Linked list 
@@ -127,7 +129,7 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="styles.stage">
       {/* Navigation */}
       <NavBar name={overview.get('name') ?? ""} />
 
@@ -180,117 +182,11 @@ export default function Portfolio() {
       </div>
     </div>
 
-      {/* Skills Section */}
-      {/* <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-center">Skills & Technologies</h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {portfolioData.skills.map((skill, index) => (
-              <span 
-                key={index}
-                className="px-6 py-3 bg-white shadow-md rounded-full font-medium hover:bg-black hover:text-white hover:shadow-lg transition"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section> */}
+    <Stack stack={stack}/>
 
-      {/* Projects Section */}
-      {/* <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioData.projects.map((project) => (
-              <div 
-                key={project.id}
-                className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 group cursor-pointer"
-              >
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition duration-300 flex space-x-4">
-                      <a 
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-white rounded-full hover:bg-gray-100 transition"
-                      >
-                        <ExternalLink size={20} className="text-black" />
-                      </a>
-                      <a 
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-white rounded-full hover:bg-gray-100 transition"
-                      >
-                        <Github size={20} className="text-black" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, index) => (
-                      <span 
-                        key={index}
-                        className="px-3 py-1 bg-black text-white rounded-full text-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
+    <ExperienceList experience={experiences} />
 
-      {/* Contact Section */}
-      {/* <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8">Let's Work Together</h2>
-          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <a 
-              href={`mailto:${portfolioData.email}`}
-              className="inline-block px-8 py-4 bg-black text-white rounded-full font-semibold text-lg hover:bg-gray-800 transition"
-            >
-              Email Me
-            </a>
-            <a 
-              href={portfolioData.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-8 py-4 border-2 border-black text-black rounded-full font-semibold text-lg hover:bg-black hover:text-white transition"
-            >
-              View GitHub
-            </a>
-          </div>
-          <p className="text-gray-600">
-            📍 {portfolioData.location} | 📞 {portfolioData.phone}
-          </p>
-        </div>
-      </section> */}
-
-      {/* Footer */}
-      {/* <footer className="py-8 px-4 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto text-center text-gray-600">
-          <p>© 2024 {portfolioData.name}. Built with Next.js & React.</p>
-        </div>
-      </footer> */}
+    <Projects />
 
       {/*<Chatbot />*/}
 
