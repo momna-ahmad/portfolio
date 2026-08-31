@@ -5,6 +5,8 @@ import { MessageCircle, MessageSquareCode, Sparkles, X, Send } from 'lucide-reac
 import "../styles/aibutton.css";
 
 
+const API_URL = process.env.NEXT_PUBLIC_CHATBOT_API;
+
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
