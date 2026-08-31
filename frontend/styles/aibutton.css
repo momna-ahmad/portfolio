@@ -1,0 +1,53 @@
+/* The AI Button */
+.aiBtn {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #a1a1aa;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: auto; /* Pushes the button to the absolute right */
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+/* Match the dark toolbar aesthetic */
+.ai-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff; /* Glows white on hover */
+}
+
+.ai-btn:active {
+  transform: scale(0.95);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.ai-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* Wrapper if using Option 1 */
+.icon-wrapper {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.chat-bubble {
+  width: 100%;
+  height: 100%;
+}
+
+.sparkles {
+  position: absolute;
+  top: -4px;
+  right: -5px;
+  fill: currentColor;
+}

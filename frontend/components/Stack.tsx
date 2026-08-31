@@ -1,42 +1,124 @@
 'use client' ;
 import React , { useState } from 'react';
-import '../styles/stack.css';
+import styles from "../styles/stack.module.css" ;
 
 interface StackProps {
   stack: string[];
 }
 
+interface TransferringDisc {
+  tech: string;
+  dx: number;
+  dy: number;
+  peakY: number;
+}
+
+const DISC_HEIGHT = 45; // 60px height - 15px overlap = 45px effective step per layer
+const STACK_GAP = 280;  // Horizontal distance between centers (px)
+
 export default function Stack({ stack : initialStack }: StackProps) {
-    const [items, setItems] = useState<string[]>(initialStack);
-    const [isPopping, setIsPopping] = useState<boolean>(false);
+    const [leftStack, setLeftStack] = useState<string[]>(initialStack);
+    const [rightStack, setRightStack] = useState<string[]>([]);
+    const [movingDisc, setMovingDisc] = useState<TransferringDisc | null>(null);
 
     const handlePop = () => {
-        // Prevent multiple clicks while popping or if empty
-        if (isPopping || items.length === 0) return;
+      if (movingDisc || leftStack.length === 0) return;
 
-        setIsPopping(true);
+      const poppedItem = leftStack[0];
+      const leftCount = leftStack.length;
+      const rightCount = rightStack.length;
+      // Calculate vertical offset (dy)
+    // Left stack top is at: -(leftCount - 1) * 45px from base
+    // Right stack target top is at: -rightCount * 45px from base
+    // dy = targetY - sourceY = (leftCount - 1 - rightCount) * 45px
+    const dy = (leftCount - 1 - rightCount) * DISC_HEIGHT;
+    const dx = STACK_GAP;
 
-        // Wait for the CSS animation to finish (600ms), then remove top element
-        setTimeout(() => {
-        setItems((prev) => prev.slice(1));
-        setIsPopping(false);
-        }, 600);
+    // Determine arc trajectory height
+    let peakY = -40; // Default pop lift
+    if (rightCount >= leftCount) {
+      // If right stack is taller, elevate above the right stack's peak
+      peakY = dy - 50; 
+    }
+
+    setMovingDisc({
+      tech: poppedItem,
+      dx,
+      dy,
+      peakY,
+    });
+
+    // Remove from left stack immediately so animation is visually active
+    setLeftStack((prev) => prev.slice(1));
+
+    // After animation duration (750ms), settle the disc on the right stack
+    setTimeout(() => {
+      setRightStack((prev) => [poppedItem, ...prev]);
+      setMovingDisc(null);
+    }, 750);
     };
 
   return (
-    <div className="container">
-      <div className="disc-stack" onClick={handlePop}>
-        {items.map((tech, index) => (
+    <div>
+      <h2 className={styles.heading}>/ Tech Stack</h2>
+    
+    <div className={styles.container}>
+      <div className={styles.arena}>
+      <div className={styles['disc-column']} onClick={handlePop}>
+        {/* Animated disc actively flying to the right */}
+          {movingDisc && (
+              <div
+                className={`${styles.disc} ${styles['flying-disc']}`}
+                style={{
+                  zIndex: 999,
+                  ['--dx' as any]: `${movingDisc.dx}px`,
+                  ['--dy' as any]: `${movingDisc.dy}px`,
+                  ['--peak-y' as any]: `${movingDisc.peakY}px`,
+                }}
+              >
+                <div className={styles['disc-top']} />
+                <span className={styles['disc-text']}>{movingDisc.tech}</span>
+              </div>
+            )}
+
+        {leftStack.map((tech, index) => (
           <div 
             key={index} 
-            className="disc" 
-            style={{ zIndex: items.length - index }}
+            className={styles.disc} 
+            style={{ zIndex: leftStack.length - index }}
           >
-            <div className="disc-top" />
-            <span className="disc-text">{tech}</span>
+            <div className={styles['disc-top']} />
+            <span className={styles['disc-text']}>{tech}</span>
           </div>
         ))}
+        {leftStack.length === 0 && !movingDisc && (
+            <div className={`${styles['stack-placeholder']}`}>
+              Left Stack Empty
+            </div>
+          )}
       </div>
+
+      {/* Right Stack */}
+          <div className={`${styles['disc-column']} ${styles['target-column']}`}>
+            {rightStack.map((tech, index) => (
+              <div
+                key={tech}
+                className={styles.disc}
+                style={{ zIndex: rightStack.length - index }}
+              >
+                <div className={styles['disc-top']} />
+                <span className={styles['disc-text']}>{tech}</span>
+              </div>
+            ))}
+
+            {rightStack.length === 0 && (
+              <div className={`${styles['stack-placeholder']} ${styles['right-placeholder']}`}>
+                Right Target (Empty)
+              </div>
+            )}
+          </div>
+    </div>
+    </div>
     </div>
   );
 }

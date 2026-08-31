@@ -5,6 +5,7 @@ import ExperienceList from '@/components/Experience';
 import Projects from '@/components/Projects';
 import Chatbot from '@/components/Chatbot';
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
+import Contact from '@/components/Contact';
 
 // Portfolio data - display design 
 //General information - Hashmap 
@@ -188,7 +189,7 @@ export default function Portfolio() {
 
     <Projects />
 
-      {/*<Chatbot />*/}
+    <Contact />
 
     </div>
   );
