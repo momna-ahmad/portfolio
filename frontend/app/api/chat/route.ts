@@ -4,17 +4,9 @@ import path from 'path';
 
 import { OpenAIEmbeddings, ChatOpenAI } from '@langchain/openai';
 
-const llm = new ChatOpenAI({
-  modelName: 'mistralai/mistral-7b-instruct',
-  temperature: 0,
-  openAIApiKey: process.env.OPENROUTER_API_KEY,
-  configuration: {
-    baseURL: 'https://openrouter.ai/api/v1',
-  },
-});
 
 const embeddings = new OpenAIEmbeddings({
-  modelName: 'openai/text-embedding-3-small',
+  modelName: 'sentence-transformers/all-MiniLM-L6-v2',
   openAIApiKey: process.env.OPENROUTER_API_KEY,
   configuration: {
     baseURL: 'https://openrouter.ai/api/v1',
@@ -41,7 +33,7 @@ async function initVectorStore(): Promise<VectorDoc[]> {
   if (cachedDocs) return cachedDocs;
 
   // Read the text file
-  const filePath = path.join(process.cwd(), 'resume.txt');
+  const filePath = path.join(process.cwd(), 'public', 'resume.txt');
   const rawText = fs.readFileSync(filePath, 'utf-8');
 
   // Split text by paragraph breaks
@@ -96,6 +88,22 @@ ${contextText}
 Question: ${query}
 
 Answer:`;
+
+      const apiKey = process.env.OPENROUTER_API_KEY || process.env.OPENAI_API_KEY;
+
+      const llm = new ChatOpenAI({
+      modelName: 'inclusionai/ling-3.0-flash-fin:free',
+      temperature: 0.2,
+      apiKey: apiKey,
+      configuration: {
+        baseURL: 'https://openrouter.ai/api/v1',
+        apiKey: apiKey,
+        defaultHeaders: {
+          'HTTP-Referer': 'http://localhost:3000',
+          'X-Title': 'Portfolio Assistant',
+        },
+      },
+    });
 
     const response = await llm.invoke(prompt);
 

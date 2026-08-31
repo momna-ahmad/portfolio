@@ -34,8 +34,8 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      // Send request to FastAPI backend
-      const response = await fetch('http://localhost:8000/chat', {
+      // next js route handler 
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,6 +62,13 @@ export default function Chatbot() {
       }]);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
     }
   };
 
@@ -148,7 +155,7 @@ export default function Chatbot() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                
+                onKeyDown={handleKeyDown}
                 placeholder="Type your message..."
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-black transition"
                 disabled={isLoading}
