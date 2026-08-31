@@ -1,0 +1,136 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.heading {
+  font-size: clamp(24px, 3.2vw, 32px);
+  font-weight: 700;
+  margin: 0 0 6px 2px;
+  letter-spacing: -0.01em;
+}
+
+/* Arena holding both left and right stacks aligned to baseline */
+.arena {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px; /* Aligns with STACK_GAP (200px disc width + 80px gap = 280px) */
+  align-items: flex-end; /* Keeps both stacks grounded at the same baseline */
+  min-height: 450px;
+  padding-bottom: 50px;
+}
+
+.wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* Individual Stack Column */
+.disc-column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.disc-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Floating the parent stack avoids internal layer jitter */
+  animation: float 3s ease-in-out infinite alternate;
+}
+
+.disc {
+  position: relative;
+  width: 270px;
+  height: 70px;
+  background: #3b82f6;
+  border-radius: 0 0 100px 100px / 0 0 30px 30px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, margin 0.3s ease;
+}
+
+/* Overlap so the upper disc's body fully hides the lower disc's top oval */
+.disc + .disc {
+  margin-top: -20px;
+}
+
+.disc.flying-disc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: dynamicTransfer 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+
+/* Oval Top Lid */
+.disc-top {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 270px;
+  height: 60px;
+  background: #60a5fa;
+  border-radius: 50%;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.disc-text {
+  position: relative;
+  z-index: 2;
+  top: 10px;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  transform: translateY(2px);
+  user-select: none;
+}
+
+@keyframes dynamicTransfer {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  35% {
+    /* Elevates to the calculated peak above whatever stack is taller */
+    transform: translate(calc(var(--dx) * 0.35), var(--peak-y)) scale(1.04);
+  }
+  70% {
+    /* Glides over the top of the target column */
+    transform: translate(var(--dx), calc(var(--peak-y) + 15px)) scale(1.02);
+  }
+  100% {
+    /* Settles down into place */
+    transform: translate(var(--dx), var(--dy)) scale(1);
+  }
+}
+
+/* Optional empty placeholders */
+.stack-placeholder {
+  color: #4b5563;
+  font-size: 0.85rem;
+  font-family: sans-serif;
+  padding: 18px 25px;
+  border: 2px dashed #374151;
+  border-radius: 20px;
+  text-align: center;
+}

@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  --bg: #0c1713;
+  --bg-glow: #12241d;
+  --mint: #7fd9a8;
+  --mint-dim: #3f6e57;
+  --amber: #e8b95c;
+  --text: #f2efe6;
+  --muted: #93a89c;
+  --punct: #4d6b5c;
+}
+
+.stage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  background: radial-gradient(
+      ellipse 900px 600px at 50% 0%,
+      var(--bg-glow),
+      transparent 60%
+    ),
+    var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+  overflow-x: hidden;
+}
+
+.frame {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 1100px;
+  width: 100%;
+  gap: 0;
+}
+
+.brace {
+  flex: 0 0 auto;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  font-size: clamp(140px, 22vw, 300px);
+  line-height: 0.82;
+  color: var(--mint);
+  opacity: 0.85;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 0 40px rgba(127, 217, 168, 0.15));
+  animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.left {
+  animation-delay: 0.05s;
+}
+.right {
+  animation-name: rise-r;
+  animation-delay: 0.15s;
+  transform: scaleX(-1);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+}
+@keyframes rise-r {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scaleX(-1);
+  }
+  to {
+    opacity: 0.85;
+    transform: translateY(0) scaleX(-1);
+  }
+}
+
+.content {
+  flex: 1 1 auto;
+  max-width: 620px;
+  padding: 12px clamp(16px, 4vw, 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+
+.pair {
+  opacity: 0;
+  animation: fadeIn 0.7s ease forwards;
+}
+.name {
+  animation-delay: 0.35s;
+}
+.title {
+  animation-delay: 0.5s;
+}
+.desc {
+  animation-delay: 0.65s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.key {
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--mint);
+  margin-bottom: 6px;
+}
+.q {
+  color: var(--punct);
+}
+.colon {
+  color: var(--punct);
+  margin-left: 2px;
+}
+
+.value {
+  display: block;
+  max-width: 46ch;
+}
+
+.name .value {
+  font-size: clamp(38px, 6.2vw, 68px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.title .value {
+  font-size: clamp(20px, 2.8vw, 28px);
+  font-weight: 500;
+  color: var(--amber);
+}
+
+.desc .value {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(16px, 1.7vw, 19px);
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.comma {
+  color: var(--punct);
+  font-family: "JetBrains Mono", monospace;
+}
+
+@media (max-width: 720px) {
+  .frame {
+    gap: 0;
+    align-items: stretch;
+  }
+  .brace {
+    font-size: clamp(64px, 18vw, 110px);
+  }
+  .content {
+    padding: 12px 6px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .brace {
+    font-size: clamp(48px, 16vw, 80px);
+  }
+  .content {
+    padding: 8px 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brace,
+  .pair {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}

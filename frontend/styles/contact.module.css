@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+:root {
+  --bg: #0c1713;
+  --bg-glow: #12241d;
+  --mint: #7fd9a8;
+  --mint-dim: #3f6e57;
+  --amber: #e8b95c;
+  --coral: #e8846f;
+  --text: #f2efe6;
+  --muted: #93a89c;
+  --punct: #4d6b5c;
+  --card: #10201a;
+  --card-border: #234438;
+}
+
+.wrap {
+  min-height: 100vh;
+  padding: 64px 24px;
+  display: flex;
+  justify-content: center;
+  background: radial-gradient(
+      ellipse 900px 600px at 50% 0%,
+      var(--bg-glow),
+      transparent 60%
+    ),
+    var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.panel {
+  width: 100%;
+  max-width: 900px;
+}
+
+.eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 4px 2px;
+}
+.k {
+  color: var(--mint);
+}
+.p {
+  color: var(--punct);
+}
+
+.heading {
+  font-size: clamp(24px, 3.2vw, 32px);
+  font-weight: 700;
+  margin: 0 0 6px 2px;
+  letter-spacing: -0.01em;
+}
+
+.hint {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--punct);
+  margin: 0 0 36px 2px;
+}
+
+.sectionLabel {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--punct);
+  margin: 0 0 14px 2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* ---------------- left: contact links ---------------- */
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.linkRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.linkRow:hover {
+  border-color: var(--mint-dim);
+  transform: translateY(-2px);
+}
+
+.iconBox {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(127, 217, 168, 0.08);
+  border: 1px solid rgba(127, 217, 168, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.iconBox svg {
+  width: 18px;
+  height: 18px;
+}
+
+.linkText {
+  min-width: 0;
+}
+.linkKey {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--punct);
+  margin: 0 0 2px;
+}
+.linkValue {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 12px 16px;
+  background: rgba(127, 217, 168, 0.06);
+  border: 1px solid rgba(127, 217, 168, 0.18);
+  border-radius: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--mint);
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 8px rgba(127, 217, 168, 0.6);
+  flex-shrink: 0;
+}
+
+/* ---------------- right: message form ---------------- */
+.formCard {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+.field:last-of-type {
+  margin-bottom: 0;
+}
+
+.field label {
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--punct);
+  margin-bottom: 6px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  border-radius: 7px;
+  padding: 10px 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13.5px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease;
+  resize: vertical;
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--punct);
+}
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--mint);
+}
+
+.field textarea {
+  min-height: 96px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.submitBtn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(232, 185, 92, 0.4);
+  background: rgba(232, 185, 92, 0.1);
+  color: var(--amber);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.submitBtn:hover {
+  background: rgba(232, 185, 92, 0.18);
+}
+.submitBtn:active {
+  transform: scale(0.98);
+}
+.sent {
+  background: rgba(127, 217, 168, 0.12);
+  border-color: rgba(127, 217, 168, 0.4);
+  color: var(--mint);
+}
+
+.formCaption {
+  margin: 14px 2px 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--punct);
+}
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

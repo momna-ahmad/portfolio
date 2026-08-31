@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send } from 'lucide-react';
+import { MessageCircle, MessageSquareCode, Sparkles, X, Send } from 'lucide-react';
+import "../styles/aibutton.css";
+
 
 const API_URL = process.env.NEXT_PUBLIC_CHATBOT_API;
 
@@ -34,8 +36,8 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      // Send request to FastAPI backend
-      const response = await fetch(`${API_URL}/chat`, {
+      // next js route handler 
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,18 +67,37 @@ export default function Chatbot() {
     }
   };
 
+   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
 
   return (
     <>
       {/* Floating Chat Button */}
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 bg-black text-white p-4 rounded-full shadow-lg hover:bg-gray-800 transition-all hover:scale-110 z-50"
-          aria-label="Open chat"
-        >
-          <MessageCircle size={24} />
-        </button>
+          <button className="ai-btn" onClick={() => setIsOpen(true)} aria-label="AI Chat">
+            <div className="icon-wrapper">
+              {/* Chat bubble outline */}
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="chat-bubble"
+              >
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h10" />
+              </svg>
+
+              {/* Dual sparkle stars */}
+              <Sparkles className="sparkles" size={12} />
+            </div>
+          </button>
       )}
 
       {/* Chat Window */}
@@ -136,7 +157,7 @@ export default function Chatbot() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                
+                onKeyDown={handleKeyDown}
                 placeholder="Type your message..."
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-black transition"
                 disabled={isLoading}

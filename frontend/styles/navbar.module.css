@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+:root {
+  --mint: #7fd9a8;
+  --mint-dim: #3f6e57;
+  --amber: #e8b95c;
+  --text: #f2efe6;
+  --muted: #93a89c;
+  --punct: #4d6b5c;
+  --card: #10201a;
+  --card-border: #234438;
+  --chrome: #0a140f;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  background: var(--chrome);
+  border-bottom: 1px solid var(--card-border);
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+}
+
+/* left — plain text menu items, no pill or border */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.menuItem {
+  padding: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.menuItem:hover {
+  color: var(--mint);
+}
+
+/* center — mimics the VS Code command bar */
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.searchPill {
+  display: flex;
+  align-items
+  : center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 500px;
+  padding: 6px 14px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12.5px;
+  max-width: 100%;
+}
+.searchPill svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--punct);
+}
+.searchPill span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* right — single AI chat icon */
+.right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.iconBtn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  color: var(--mint);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.iconBtn:hover {
+  background: rgba(127, 217, 168, 0.1);
+}
+.iconBtn svg {
+  width: 17px;
+  height: 17px;
+}
+
+@media (max-width: 560px) {
+  .navbar {
+    gap: 8px;
+    padding: 0 10px;
+  }
+  .menu {
+    gap: 12px;
+  }
+  .menuItem {
+    font-size: 12px;
+  }
+  .searchPill span {
+    display: none;
+  }
+}
