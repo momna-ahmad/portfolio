@@ -17,7 +17,7 @@ if not os.getenv("HUGGINGFACEHUB_API_TOKEN"):
 
 # 2. LOAD THE RESUME
 print("Loading PDF...")
-loader = PyPDFLoader("resume.pdf")
+loader = PyPDFLoader("resume update.pdf")
 data = loader.load()
 
 # 3. SPLIT TEXT INTO CHUNKS
