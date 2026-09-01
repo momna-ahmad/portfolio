@@ -48,7 +48,7 @@ const experiences = [
 const projects = [
   {
       id: 1,
-      type: "Web Application",
+      type: "web",
       title: "Fundxprout - A Crowdfunding Platform",
       description: "A web platform for listing homes, vehicles, and halls for rent, enabling users to create and browse rental opportunities with real-time chat functionality.",
       image: "/fundxprout.png",
@@ -58,27 +58,27 @@ const projects = [
     },
     {
       id: 2,
-      type: "Web Application",
+      type: "web",
       title: "CliniConnect - A Healthcare Platform",
       description: "A web platform for listing homes, vehicles, and halls for rent, enabling users to create and browse rental opportunities with real-time chat functionality.",
-      image: "/rentalot.png",
+      image: "/cliniconnect.png",
       tags: ["React", "TypeScript", "Supabase", "Jitsi Meet", "Paystack API"],
       liveUrl: "https://www.cliniconnectng.com",
       githubUrl: "https://github.com/momna-ahmad"
     },
     {
       id: 3,
-      type: "Mobile Application",
+      type: "mobile",
       title: "CliniConnect - A Healthcare Mobile App",
       description: "A cross-platform mobile application for connecting patients with healthcare professionals, featuring real-time video consultations and appointment scheduling.",
-      image: "/rentalot.png",
+      image: "/cliniconnectmobile.png",
       tags: ["React Native", "Expo", "Supabase"],
       liveUrl: "https://github.com/momna-ahmad",
       githubUrl: "https://github.com/momna-ahmad"
     },
   {
       id: 4,
-      type: "Web Application",
+      type: "web",
       title: "Rental Platform",
       description: "A web platform for listing homes, vehicles, and halls for rent, enabling users to create and browse rental opportunities with real-time chat functionality.",
       image: "/rentalot.png",
@@ -88,7 +88,7 @@ const projects = [
     },
     {
       id: 5,
-      type: "Web Application",
+      type: "web",
       title: "CRM Website",
       description: "A comprehensive CRM dashboard to manage customer data, tasks and workflows with RESTful API integration and email support system.",
       image: "/globuy.png",
@@ -98,7 +98,7 @@ const projects = [
     },
     {
       id: 6,
-      type: "Web Application",
+      type: "web",
       title: "Mentorship Platform",
       description: "A platform connecting students with mentors for career guidance, featuring secure authentication and payment processing for priority services.",
       image: "/mentora.png",
@@ -108,17 +108,17 @@ const projects = [
     },
     {
       id: 7,
-      type: "Mobile Application",
+      type: "mobile",
       title: "Home Services Mobile App",
       description: "A job marketplace app enabling users to post jobs and professionals to request completion, with location-based matching within 5km radius.",
-      image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=600&fit=crop",
+      image: "/homeServices.png",
       tags: ["Flutter", "Firebase", "Node.js", "Maps API"],
       liveUrl: "https://github.com/momna-ahmad",
       githubUrl: "https://github.com/momna-ahmad"
     },
     {
       id: 8,
-      type: "Web Application",
+      type: "web",
       title: "Web Application Firewall Optimizer",
       description: "An intelligent WAF optimizer using Groq API and LLM-driven analysis for continuous security and performance tuning with automatic rule optimization.",
       image: "/firewall-optimizer.png",
@@ -187,7 +187,7 @@ export default function Portfolio() {
 
     <ExperienceList experience={experiences} />
 
-    <Projects />
+    <Projects projects={projects} />
 
     <Contact />
 

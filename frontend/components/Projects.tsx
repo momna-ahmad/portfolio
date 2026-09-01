@@ -4,21 +4,15 @@ import styles from "../styles/projects.module.css";
 
 type Accent = "mint" | "amber" | "coral";
 
-type WebProject = {
+type ProjectsProps = {
+  id: number;
   title: string;
-  url: string;
-  accent: Accent;
-  summary: string;
-  detail: string;
+  type: string;
+  description: string;
   tags: string[];
-};
-
-type MobileProject = {
-  title: string;
-  accent: Accent;
-  summary: string;
-  detail: string;
-  tags: string[];
+  image: string;
+  liveUrl: string;
+  githubUrl: string;
 };
 
 const accentColors: Record<Accent, string> = {
@@ -27,65 +21,21 @@ const accentColors: Record<Accent, string> = {
   coral: "#e8846f",
 };
 
-// Edit these two arrays with your real projects.
-const webProjects: WebProject[] = [
-  {
-    title: "TaskFlow",
-    url: "taskflow.app",
-    accent: "mint",
-    summary:
-      "A collaborative task manager with real-time boards and deadlines.",
-    detail:
-      "Drag-and-drop boards with live sync across teammates, due-date reminders, and activity history per card.",
-    tags: ["React", "Node.js", "PostgreSQL"],
-  },
-  {
-    title: "RecipeBox",
-    url: "recipebox.io",
-    accent: "amber",
-    summary: "Search and save recipes with smart pantry-based suggestions.",
-    detail:
-      "Suggests recipes based on ingredients you already have, with saved collections and a weekly meal planner.",
-    tags: ["Next.js", "Tailwind", "MongoDB"],
-  },
-  {
-    title: "BudgetLine",
-    url: "budgetline.app",
-    accent: "coral",
-    summary:
-      "Track monthly spending across accounts with visual breakdowns.",
-    detail:
-      "Connects multiple accounts into one dashboard with category breakdowns and month-over-month spending trends.",
-    tags: ["Vue", "Firebase"],
-  },
-];
 
-const mobileProjects: MobileProject[] = [
-  {
-    title: "FitPing",
-    accent: "mint",
-    summary: "Simple workout reminders that adapt to your weekly schedule.",
-    detail:
-      "Learns your usual workout days and nudges you at the right time, with quick-log buttons for common exercises.",
-    tags: ["React Native", "SQLite"],
-  },
-  {
-    title: "DayJar",
-    accent: "amber",
-    summary: "A one-line journal app with mood tags and photo memories.",
-    detail:
-      "Encourages a single daily sentence, tagged with a mood and an optional photo, collected into a scrollable timeline.",
-    tags: ["Swift", "CoreData"],
-  },
-];
-
-function PlaceholderShot({ variant }: { variant: "web" | "mobile" }) {
+function PlaceholderShot({ variant , src }: { variant: "web" | "mobile"  , src?: string}) {
   return (
     <div
       className={`${styles.shot} ${
         variant === "web" ? styles.shotWeb : styles.shotMobile
       }`}
     >
+      {src ? (
+        <img
+          src={src.startsWith("/") ? src : `/${src}`}
+          alt="Project Screenshot"
+          
+        />
+      ) : (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect
           x="3"
@@ -105,18 +55,17 @@ function PlaceholderShot({ variant }: { variant: "web" | "mobile" }) {
           strokeLinejoin="round"
         />
       </svg>
+      )}
     </div>
   );
 }
 
 function ProjectRow({
   title,
-  summary,
   detail,
   tags,
 }: {
   title: string;
-  summary: string;
   detail: string;
   tags: string[];
 }) {
@@ -125,33 +74,25 @@ function ProjectRow({
   return (
     <div className={styles.row}>
       <div className={styles.rowHead} onClick={() => setOpen(!open)}>
-        <span
-          className={`${styles.chevron} ${open ? styles.chevronOpen : ""}`}
-        >
-          ▸
-        </span>
-        <div className={styles.titleBlock}>
-          <p className={styles.projTitle}>{title}</p>
-          <p className={styles.summary}>{summary}</p>
-          <div className={`${styles.more} ${open ? styles.moreOpen : ""}`}>
-            <div className={styles.moreInner}>
-              {detail}
-              <div className={styles.tags}>
-                {tags.map((t) => (
-                  <span key={t} className={styles.tag}>
-                    {t}
-                  </span>
-                ))}
-              </div>
+            <div className={styles.detailExpanded}>
+              <p className={styles.detailText}>{detail}</p>
+              
+              {tags && tags.length > 0 && (
+                <div className={styles.tags}>
+                  {tags.map((t) => (
+                    <span key={t} className={styles.tag}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        </div>
       </div>
     </div>
   );
 }
 
-function BrowserWindow({ project }: { project: WebProject }) {
+function BrowserWindow({ project }: { project: ProjectsProps }) {
   return (
     <div className={styles.browser}>
       <div className={styles.tabBar}>
@@ -160,7 +101,7 @@ function BrowserWindow({ project }: { project: WebProject }) {
         <div className={styles.tab}>
           <span
             className={styles.favicon}
-            style={{ background: accentColors[project.accent] }}
+            
           />
           {project.title}
           <span className={styles.close}>×</span>
@@ -172,15 +113,14 @@ function BrowserWindow({ project }: { project: WebProject }) {
           <span>⟳</span>
         </div>
         <div className={styles.urlPill}>
-          <span className={styles.u}>{project.url}</span>
+          <span className={styles.u}>{project.liveUrl}</span>
         </div>
       </div>
       <div className={styles.deviceContent}>
-        <PlaceholderShot variant="web" />
+        <PlaceholderShot variant="web" src={project.image} />
         <ProjectRow
           title={project.title}
-          summary={project.summary}
-          detail={project.detail}
+          detail={project.description}
           tags={project.tags}
         />
       </div>
@@ -188,16 +128,15 @@ function BrowserWindow({ project }: { project: WebProject }) {
   );
 }
 
-function PhoneFrame({ project }: { project: MobileProject }) {
+function PhoneFrame({ project }: { project: ProjectsProps }) {
   return (
     <div className={styles.phone}>
       <div className={styles.speaker} />
       <div className={styles.deviceContent}>
-        <PlaceholderShot variant="mobile" />
+        <PlaceholderShot variant="mobile" src={project.image} />
         <ProjectRow
           title={project.title}
-          summary={project.summary}
-          detail={project.detail}
+          detail={project.description}
           tags={project.tags}
         />
       </div>
@@ -206,7 +145,7 @@ function PhoneFrame({ project }: { project: MobileProject }) {
   );
 }
 
-export default function Projects() {
+export default function Projects({projects}: {projects: ProjectsProps[]}) {
   return (
     <div className={styles.wrap}>
       <div className={styles.panel}>
@@ -219,16 +158,20 @@ export default function Projects() {
 
         <p className={styles.sectionLabel}>// web</p>
         <div className={styles.webGrid}>
-          {webProjects.map((p) => (
-            <BrowserWindow key={p.title} project={p} />
-          ))}
+          {projects
+    .filter((project) => project.type === "web")
+    .map((project) => (
+      <BrowserWindow key={project.title} project={project} />
+  ))}
         </div>
 
         <p className={styles.sectionLabel}>// mobile</p>
         <div className={styles.phoneGrid}>
-          {mobileProjects.map((p) => (
-            <PhoneFrame key={p.title} project={p} />
-          ))}
+          {projects
+    .filter((project) => project.type === "mobile")
+    .map((project) => (
+      <PhoneFrame key={project.title} project={project} />
+  ))}
         </div>
       </div>
     </div>

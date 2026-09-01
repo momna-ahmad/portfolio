@@ -2,10 +2,9 @@
 import { useState, FormEvent } from "react";
 import styles from "../styles/contact.module.css";
 
-// Edit these with your real links.
-const email = "you@email.com";
-const github = "github.com/yourhandle";
-const linkedin = "linkedin.com/in/yourhandle";
+const email = "momnaahmdd@gmailcom";
+const github = "github.com/momna-ahmad";
+const linkedin = "linkedin.com/in/momena-ahmad-9448a1412/";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -125,9 +124,6 @@ export default function Contact() {
                 {sent ? "sent ✓" : "send message →"}
               </button>
             </form>
-            <p className={styles.formCaption}>
-              // connect this form to Formspree, EmailJS, or your own backend
-            </p>
           </div>
         </div>
       </div>
