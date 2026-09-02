@@ -16,7 +16,7 @@ export default function Navbar({ name }: { name: string }) {
         <button className={styles.menuItem} onClick={() => scrollToSection('skills')}>
           Skills
         </button>
-        <button className={styles.menuItem} onClick={() => scrollToSection('skills')}>
+        <button className={styles.menuItem} onClick={() => scrollToSection('experience')}>
           Experience
         </button>
         <button className={styles.menuItem} onClick={() => scrollToSection('projects')}>

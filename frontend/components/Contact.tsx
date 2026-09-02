@@ -1,37 +1,46 @@
 "use client";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useRef } from "react";
 import styles from "../styles/contact.module.css";
+import emailjs from '@emailjs/browser';
 
 const email = "momnaahmdd@gmailcom";
 const github = "github.com/momna-ahmad";
 const linkedin = "linkedin.com/in/momena-ahmad-9448a1412/";
 
 export default function Contact() {
-  const [name, setName] = useState("");
-  const [messageEmail, setMessageEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [sent, setSent] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  function handleSubmit(e: FormEvent) {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: connect this to Formspree, EmailJS, or your own backend.
-    setSent(true);
-    setTimeout(() => {
-      setSent(false);
-      setName("");
-      setMessageEmail("");
-      setMessage("");
-    }, 2200);
-  }
+    if (!formRef.current) return;
+
+    setLoading(true);
+    setStatus('idle');
+
+    try {
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      setStatus('success');
+      formRef.current.reset();
+    } catch (err) {
+      console.error('EmailJS Error:', err);
+      setStatus('error');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={styles.wrap}>
       <div className={styles.panel}>
-        <p className={styles.eyebrow}>
-          <span className={styles.k}>const</span> contact{" "}
-          <span className={styles.p}>=</span> {"{}"}
-        </p>
-        <h2 className={styles.heading}>Let's Connect</h2>
+        <h2 className={styles.heading}>/ Contact</h2>
 
         <div className={styles.grid}>
           <div>
@@ -84,15 +93,14 @@ export default function Contact() {
 
           <div>
             <p className={styles.sectionLabel}>// send a message</p>
-            <form className={styles.formCard} onSubmit={handleSubmit}>
+            <form ref={formRef} className={styles.formCard} onSubmit={handleSubmit}>
               <div className={styles.field}>
                 <label htmlFor="cf-name">name</label>
                 <input
                   id="cf-name"
                   type="text"
                   placeholder="Your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  name="name"
                   required
                 />
               </div>
@@ -102,8 +110,7 @@ export default function Contact() {
                   id="cf-email"
                   type="email"
                   placeholder="you@example.com"
-                  value={messageEmail}
-                  onChange={(e) => setMessageEmail(e.target.value)}
+                  name="email"
                   required
                 />
               </div>
@@ -112,17 +119,28 @@ export default function Contact() {
                 <textarea
                   id="cf-message"
                   placeholder="What's on your mind?"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  name="message"
                   required
                 />
               </div>
               <button
                 type="submit"
-                className={`${styles.submitBtn} ${sent ? styles.sent : ""}`}
+                disabled={loading}
+                className="w-full bg-black text-white py-2.5 px-4 rounded-md font-medium hover:bg-gray-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {sent ? "sent ✓" : "send message →"}
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
+
+              {status === 'success' && (
+                <p className="text-green-600 text-sm mt-2 text-center">
+                  Message sent successfully! I will get back to you soon.
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="text-red-600 text-sm mt-2 text-center">
+                  Failed to send message. Please check your network or try again.
+                </p>
+              )}
             </form>
           </div>
         </div>

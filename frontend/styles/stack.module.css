@@ -1,7 +1,21 @@
+:root {
+  --bg: #0c1713;
+  --bg-glow: #12241d;
+  --mint: #7fd9a8;
+  --mint-dim: #3f6e57;
+  --amber: #e8b95c;
+  --text: #f2efe6;
+  --muted: #93a89c;
+  --punct: #4d6b5c;
+  --card: #10201a;
+  --card-border: #234438;
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   min-height: 100vh;
 }
 
@@ -10,13 +24,41 @@
   font-weight: 700;
   margin: 0 0 6px 2px;
   letter-spacing: -0.01em;
+  align-self: flex-start;
 }
+
+/* Constrains to content bounds and keeps heading aligned with the left edge of the arena */
+.innerContainer {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.panel {
+  width: 100%;
+  max-width: 900px;
+}
+
+.eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 4px 2px;
+}
+.k {
+  color: var(--mint);
+}
+.p {
+  color: var(--punct);
+}
+
 
 /* Arena holding both left and right stacks aligned to baseline */
 .arena {
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 80px; /* Aligns with STACK_GAP (200px disc width + 80px gap = 280px) */
   align-items: flex-end; /* Keeps both stacks grounded at the same baseline */
   min-height: 450px;
@@ -29,8 +71,9 @@
   align-items: center;
   justify-content: center;
   padding: 64px 24px;
-  color: var(--text);
+  color: #f2efe6;
   font-family: "Space Grotesk", sans-serif;
+  background: radial-gradient(ellipse 900px 600px at 50% 0%, #12241d, transparent 60%), #0c1713;
 }
 
 /* Individual Stack Column */
@@ -56,9 +99,10 @@
   position: relative;
   width: 270px;
   height: 70px;
-  background: #3b82f6;
+  background: #1c3d2e;
+  border: 1px solid #234438;
   border-radius: 0 0 100px 100px / 0 0 30px 30px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
   
   display: flex;
   align-items: center;
@@ -86,9 +130,10 @@
   left: 0;
   width: 270px;
   height: 60px;
-  background: #60a5fa;
+  background: #7fd9a8;
+  border: 1px solid #234438;
   border-radius: 50%;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(12, 23, 19, 0.25);
   z-index: 1;
 }
 
@@ -96,14 +141,23 @@
   position: relative;
   z-index: 2;
   top: 10px;
-  color: #ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #0c1713;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
   letter-spacing: 0.5px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   transform: translateY(2px);
   user-select: none;
+}
+
+.disc.flying-disc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* 850ms gives the curve time to breathe and decelerate */
+  animation: dynamicTransfer 0.85s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+  will-change: transform;
 }
 
 @keyframes dynamicTransfer {

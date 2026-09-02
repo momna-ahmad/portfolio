@@ -149,12 +149,7 @@ export default function Projects({projects}: {projects: ProjectsProps[]}) {
   return (
     <div className={styles.wrap}>
       <div className={styles.panel}>
-        <p className={styles.eyebrow}>
-          <span className={styles.k}>const</span> projects{" "}
-          <span className={styles.p}>=</span> []
-        </p>
-        <h2 className={styles.heading}>Projects</h2>
-        <p className={styles.hint}>click a project to expand it</p>
+        <h2 className={styles.heading}>/ Projects</h2>
 
         <p className={styles.sectionLabel}>// web</p>
         <div className={styles.webGrid}>

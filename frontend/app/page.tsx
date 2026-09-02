@@ -50,7 +50,7 @@ const projects = [
       id: 1,
       type: "web",
       title: "Fundxprout - A Crowdfunding Platform",
-      description: "A web platform for listing homes, vehicles, and halls for rent, enabling users to create and browse rental opportunities with real-time chat functionality.",
+      description: "Decentralized investment platform connecting business owners with investors using blockchain smart contracts to facilitate transparent and secure investments. Developed an AI-powered investor insights module that analyzes business pitches to generate investment risk assessments and key business insights.",
       image: "/fundxprout.png",
       tags: ["Next.js", "TypeScript", "Supabase", "Solidity"],
       liveUrl: "https://github.com/momna-ahmad",
@@ -60,7 +60,7 @@ const projects = [
       id: 2,
       type: "web",
       title: "CliniConnect - A Healthcare Platform",
-      description: "A web platform for listing homes, vehicles, and halls for rent, enabling users to create and browse rental opportunities with real-time chat functionality.",
+      description: "A web application for connecting patients with healthcare professionals, featuring real-time video consultations and appointment scheduling.",
       image: "/cliniconnect.png",
       tags: ["React", "TypeScript", "Supabase", "Jitsi Meet", "Paystack API"],
       liveUrl: "https://www.cliniconnectng.com",
@@ -110,9 +110,9 @@ const projects = [
       id: 7,
       type: "mobile",
       title: "Home Services Mobile App",
-      description: "A job marketplace app enabling users to post jobs and professionals to request completion, with location-based matching within 5km radius.",
+      description: "A job marketplace app enabling users to post jobs and professionals to request completion, with location-based matching.",
       image: "/homeServices.png",
-      tags: ["Flutter", "Firebase", "Node.js", "Maps API"],
+      tags: ["Flutter", "Firebase", "Maps API"],
       liveUrl: "https://github.com/momna-ahmad",
       githubUrl: "https://github.com/momna-ahmad"
     },
@@ -183,13 +183,21 @@ export default function Portfolio() {
       </div>
     </div>
 
-    <Stack stack={stack}/>
+    <section id="skills">
+      <Stack stack={stack}/>
+    </section>
 
-    <ExperienceList experience={experiences} />
+    <section id="experience">
+      <ExperienceList experience={experiences} />
+    </section>
 
-    <Projects projects={projects} />
+    <section id="projects">
+      <Projects projects={projects} />
+    </section>
 
-    <Contact />
+    <section id="contact">
+      <Contact />
+    </section>
 
     </div>
   );

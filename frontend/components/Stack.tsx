@@ -13,8 +13,9 @@ interface TransferringDisc {
   peakY: number;
 }
 
-const DISC_HEIGHT = 45; // 60px height - 15px overlap = 45px effective step per layer
+const DISC_HEIGHT = 50; // 60px height - 15px overlap = 45px effective step per layer
 const STACK_GAP = 280;  // Horizontal distance between centers (px)
+const ANIMATION_DURATION = 850;
 
 export default function Stack({ stack : initialStack }: StackProps) {
     const [leftStack, setLeftStack] = useState<string[]>(initialStack);
@@ -55,14 +56,19 @@ export default function Stack({ stack : initialStack }: StackProps) {
     setTimeout(() => {
       setRightStack((prev) => [poppedItem, ...prev]);
       setMovingDisc(null);
-    }, 750);
+    }, 850);
     };
 
   return (
-    <div>
-      <h2 className={styles.heading}>/ Tech Stack</h2>
-    
     <div className={styles.container}>
+      <div className={styles.innerContainer}>
+      <h2 className={styles.heading}>/ Tech Stack</h2>
+      <p className={styles.eyebrow}>
+          <span className={styles.k}>const</span> techStack{" "}
+          <span className={styles.p}>=</span> new Stack
+          <span className={styles.p}>()</span>
+        </p>
+      </div>
       <div className={styles.arena}>
       <div className={styles['disc-column']} onClick={handlePop}>
         {/* Animated disc actively flying to the right */}
@@ -80,6 +86,8 @@ export default function Stack({ stack : initialStack }: StackProps) {
                 <span className={styles['disc-text']}>{movingDisc.tech}</span>
               </div>
             )}
+
+          {movingDisc && <div style={{ height: '50px', visibility: 'hidden' }} />}
 
         {leftStack.map((tech, index) => (
           <div 
@@ -117,7 +125,7 @@ export default function Stack({ stack : initialStack }: StackProps) {
               </div>
             )}
           </div>
-    </div>
+          
     </div>
     </div>
   );
