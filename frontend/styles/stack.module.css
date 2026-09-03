@@ -61,8 +61,7 @@
   justify-content: center;
   gap: 80px; /* Aligns with STACK_GAP (200px disc width + 80px gap = 280px) */
   align-items: flex-end; /* Keeps both stacks grounded at the same baseline */
-  min-height: 450px;
-  padding-bottom: 50px;
+  min-height: 400px;
 }
 
 .wrap {
@@ -83,6 +82,7 @@
   flex-direction: column;
   align-items: center;
   width: 200px;
+  
   cursor: pointer;
   user-select: none;
 }
@@ -162,7 +162,7 @@
 
 @keyframes dynamicTransfer {
   0% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate(-35px, -7px) scale(1);
   }
   35% {
     /* Elevates to the calculated peak above whatever stack is taller */

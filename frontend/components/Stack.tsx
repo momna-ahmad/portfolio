@@ -13,8 +13,10 @@ interface TransferringDisc {
   peakY: number;
 }
 
-const DISC_HEIGHT = 50; // 60px height - 15px overlap = 45px effective step per layer
-const STACK_GAP = 280;  // Horizontal distance between centers (px)
+const DISC_HEIGHT_RIGHT = 60; // 60px height - 15px overlap = 45px effective step per layer
+const DISC_HEIGHT_LEFT = 35; // 60px height - 15px overlap = 45px effective step per layer
+const DISC_HEIGHT = 40 ;
+const STACK_GAP = 245;  // Horizontal distance between centers (px)
 const ANIMATION_DURATION = 850;
 
 export default function Stack({ stack : initialStack }: StackProps) {
@@ -32,7 +34,9 @@ export default function Stack({ stack : initialStack }: StackProps) {
     // Left stack top is at: -(leftCount - 1) * 45px from base
     // Right stack target top is at: -rightCount * 45px from base
     // dy = targetY - sourceY = (leftCount - 1 - rightCount) * 45px
-    const dy = (leftCount - 1 - rightCount) * DISC_HEIGHT;
+    let dy ;
+    dy = (leftCount - 1 - rightCount) * DISC_HEIGHT ;
+    console.log(`Popping ${poppedItem}: leftCount=${leftCount}, rightCount=${rightCount}, dy=${dy}`);
     const dx = STACK_GAP;
 
     // Determine arc trajectory height
@@ -101,7 +105,6 @@ export default function Stack({ stack : initialStack }: StackProps) {
         ))}
         {leftStack.length === 0 && !movingDisc && (
             <div className={`${styles['stack-placeholder']}`}>
-              Left Stack Empty
             </div>
           )}
       </div>
@@ -121,7 +124,6 @@ export default function Stack({ stack : initialStack }: StackProps) {
 
             {rightStack.length === 0 && (
               <div className={`${styles['stack-placeholder']} ${styles['right-placeholder']}`}>
-                Right Target (Empty)
               </div>
             )}
           </div>
