@@ -21,7 +21,7 @@
   height: 46px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: space-between;
   padding: 0 16px;
   background: var(--chrome);
   border-bottom: 1px solid var(--card-border);
@@ -54,10 +54,12 @@
 
 /* center — mimics the VS Code command bar */
 .center {
-  flex: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
-  min-width: 0;
+  pointer-events: auto;
 }
 
 .searchPill {

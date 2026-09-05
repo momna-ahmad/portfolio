@@ -34,6 +34,8 @@ export default function Navbar({ name }: { name: string }) {
           <Chatbot />
         </div>
       </div>
+
+      <div className={styles.right}></div>
     </nav>
   );
 }

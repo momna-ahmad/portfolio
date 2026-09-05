@@ -12,14 +12,15 @@ import Contact from '@/components/Contact';
 
 const overview = new Map([["name", "Momina Ahmad"], 
   ["title", "Full Stack Developer"],
-  ["description", "I pay close attention to the initial architecture of applications which ultimately makes them scalable and I ensure that agentic development doesn't compromise the architectural foundations with easy workarounds."]]);
+  ["description", "I design software with a strong focus on architectural integrity, ensuring systems remain robust and scalable as they grow. I leverage agentic AI to build faster without compromising clean abstractions, data integrity, or production reliability."]]);
 
 // Tech stack - stack 
 
 const stack = ["Next/React/Redux" ,
    "TypeScript", "Node.js/Express", 
     "Python/JavaScript/Java", 
-    "MongoDB/PostgreSQL/SQL" 
+    "MongoDB/SQL",
+    "PostgreSQL"
 ];
 
 //Experience - Linked list 
@@ -52,7 +53,7 @@ const projects = [
       title: "Fundxprout - A Crowdfunding Platform",
       description: "Decentralized investment platform connecting business owners with investors using blockchain smart contracts to facilitate transparent and secure investments. Developed an AI-powered investor insights module that analyzes business pitches to generate investment risk assessments and key business insights.",
       image: "/fundxprout.png",
-      tags: ["Next.js", "TypeScript", "Supabase", "Solidity"],
+      tags: ["Next.js", "TypeScript", "Supabase", "Solidity", "Github Actions"],
       liveUrl: "https://github.com/momna-ahmad",
       githubUrl: "https://github.com/momna-ahmad"
     },

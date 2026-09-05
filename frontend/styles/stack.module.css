@@ -64,6 +64,27 @@
   min-height: 400px;
 }
 
+/* Persistent base shadow for both columns */
+.stack-shadow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 270px;
+  height: 38px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(12, 23, 19, 0.95) 0%,
+    rgba(16, 32, 26, 0.65) 45%,
+    transparent 75%
+  );
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.8),
+              0 0 20px rgba(127, 217, 168, 0.04);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .wrap {
   min-height: 100vh;
   display: flex;

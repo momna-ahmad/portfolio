@@ -197,9 +197,17 @@
 .shotWeb {
   aspect-ratio: 16 / 8;
 }
-.shotMobile {
+
+/* .shotMobile {
   aspect-ratio: 4 / 5;
   margin-top: 6px;
+} */
+
+.shotMobile {
+  width: 160px;                     /* Adjust this width to shrink or enlarge the frame */
+  height: 330px;                    /* Constrains vertical height to fit the screen */
+  aspect-ratio: 4 / 5;           /* Standard smartphone viewport ratio */
+  margin: 0 auto;
 }
 
 .shot svg {
