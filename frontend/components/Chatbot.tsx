@@ -4,8 +4,8 @@ import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, Sparkles, X, Send } from 'lucide-react';
 import "../styles/aibutton.css";
 
-export default function Chatbot() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Chatbot({isOpen , setIsOpen} : {isOpen: boolean, setIsOpen: (isOpen: boolean) => void}) {
+  
   const [messages, setMessages] = useState([
     {
       type: 'bot',
@@ -73,35 +73,6 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Chat Button */}
-      {!isOpen && (
-        <button
-          className="ai-btn"
-          onClick={() => setIsOpen(true)}
-          aria-label="Open Assistant Chat"
-          style={{
-            borderColor: 'var(--punct)',
-            backgroundColor: 'var(--bg-glow)',
-            color: 'var(--mint)',
-          }}
-        >
-          <div className="icon-wrapper">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="chat-bubble"
-              style={{ stroke: 'var(--mint)' }}
-            >
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h10" />
-            </svg>
-            <Sparkles className="sparkles" size={12} style={{ color: 'var(--amber)' }} />
-          </div>
-        </button>
-      )}
 
       {/* Chat Window */}
       {isOpen && (
